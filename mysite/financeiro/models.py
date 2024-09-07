@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+import datetime
+from django.utils import timezone
 ##Django permite que você defina relações que são um pra um (OneToOneField),
 ##um pra muitos (ForeignKey) e muitos pra muitos (ManyToManyField).
 
@@ -12,8 +13,13 @@ class Usuario(models.Model):
 
 class Balancete(models.Model):
     nome = models.CharField(max_length=30)
-    data = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    data = models.DateTimeField('Data de registro')
+
+
+    def publicada_recentemente(self):
+        agora = timezone.now()
+        return self.data >= agora - datetime.timedelta(hours=24)
 
 class Receita(models.Model):
     nome = models.CharField(max_length=30)
