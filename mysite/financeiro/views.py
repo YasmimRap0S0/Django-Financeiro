@@ -9,8 +9,10 @@ class IndexView(View):
         return render(request, 'financeiro/index.html')
 
 class HomeView(View):
-    def get(self, request):
-        return render(request, 'financeiro/home.html')
+    def get(self, request, usuario_id):
+        # Faça algo com o usuario_id, como buscar informações no banco de dados
+        usuario = Usuario.objects.get(id=usuario_id)
+        return render(request, 'financeiro/home.html', {'usuario': usuario})
 
 class CadastroView(View):
     def get(self, request):
@@ -33,7 +35,10 @@ class CadastroView(View):
             )
 
             new_usuario.save()
-            return redirect('financeiro:home')
+
+            usuario_id = new_usuario.id
+
+            return redirect('financeiro:home', usuario_id=usuario_id)
 
         return render(request,'financeiro/cadastro.html', {'form': form, 'error_message': 'Ocorreu um erro ao salvar o usuário'})
 
