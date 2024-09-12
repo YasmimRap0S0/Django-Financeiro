@@ -14,3 +14,4 @@ class UsuarioForm(forms.ModelForm):
 class LoginForm(forms.Form):
     email = forms.EmailField(label="Email", max_length=150)
     password = forms.CharField(label="Senha", widget=forms.PasswordInput)
+
