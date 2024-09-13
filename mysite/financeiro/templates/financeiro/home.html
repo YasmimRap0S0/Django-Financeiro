@@ -25,15 +25,15 @@
     </div>
   </div>
   
-  <div class="Rectangle74" style="width: 521px; height: 50px; left: 784px; top: 657px; position: absolute; background: #D9D9D9; border-radius: 5px"></div>
+ 
   <div class="Rectangle75" style="width: 521px; height: 50px; left: 784px; top: 111px; position: absolute; background: #53C872; border-radius: 5px"></div>
   <div class="Receitas" style="left: 900px; top: 118px; position: absolute; color: white; font-size: 30px; font-family: Raleway; font-weight: 900; word-wrap: break-word">Receitas cadastradas</div>
   
-  <ul class="list-receita" style="left: 975px; top: 140px; position: absolute; color: black; font-size: 30px; font-family: Raleway; font-weight: 900; word-wrap: break-word; z-index:1; display: none;">
+  <ul class="list-receita" style="left: 975px; top: 200px; position: absolute; color: black; font-size: 30px; font-family: Raleway; font-weight: 900; word-wrap: break-word; z-index:1;">
     {% for receita in receitas.all %}
     <li style="z-index: 1; color: black;">
       {{ receita.nome }}
-      <div class="Rectangle73" style="width: 521px; height: 50px; left: -190px; margin-top:-50px; position: absolute; background: #D9D9D9; border-radius: 5px; z-index: -1;"></div>
+  
     </li>
     {% endfor %}
   </ul>
@@ -50,11 +50,10 @@
       <div class="Rectangle77" style="width: 571px; height: 50px; left: 0px; top: 0px; position: absolute; background: #2176FF; border-radius: 5px"></div>
       <div class="Rectangle77" style="width: 571px; height: 50px; left: 0px; top: 0px; position: absolute; background: #2176FF; border-radius: 5px"></div>
     <div class="BalancetesRegistrados" style="width: 360px; height: 33.70px; left: 128px; top: 7.61px; position: absolute; color: white; font-size: 30px; font-family: Raleway; font-weight: 900; word-wrap: break-word">Balancetes registrados</div>
-    <ul class="lista-b" style="width: 360px; height: 33.70px; left: 128px; top: 20px; position: absolute; color: black; font-size: 30px; font-family: Raleway; font-weight: 900; word-wrap: break-word; padding-top: 5px;" >
+    <ul class="lista-b" style="width: 360px; height: 33.70px; left: 128px; top: 20px; position: absolute; color: black; font-size: 30px; font-family: Raleway; font-weight: 900; word-wrap: break-word; padding-top: 30px;" >
         {% for balancete in balancetes %}
-        <li style="color:black;">
-            {{ usuario.balancete.nome }}
-            <div class="Rectangle74" style="width: 571px; height: 50px; left: -128px; position: absolute; background: #D9D9D9; border-radius: 5px; z-index:-1; margin-top:-40px;"></div>
+        <li style="color:black; z-index: 1;">
+            {{ balancete.nome }}
         </li>
         {% endfor %}
     </ul>

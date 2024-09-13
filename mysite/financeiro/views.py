@@ -14,9 +14,26 @@ class IndexView(View):
 
 class HomeView(View):
     def get(self, request, usuario_id):
-
         usuario = Usuario.objects.get(id=usuario_id)
-        return render(request, 'financeiro/home.html', {'usuario': usuario})
+        pesquisa = request.GET.get('palavras-chave')
+
+        balancetes = Balancete.objects.filter(usuario=usuario).order_by('-data')
+        receitas = Receita.objects.filter(usuario=usuario)
+        despesas = Despesa.objects.filter(usuario=usuario)
+        if pesquisa:
+            receitas = receitas.filter(nome__icontains=pesquisa.lower())
+            despesas = despesas.filter(nome__icontains=pesquisa.lower())
+
+        for balancete in balancetes:
+            print(balancete)
+
+        for receita in receitas:
+            print(receita)
+       
+
+        contexto = {'receitas': receitas, 'despesas': despesas, 'balancetes': balancetes}
+
+        return render(request, 'financeiro/home.html', contexto)
 
 class CadastroView(View):
     def get(self, request):
@@ -47,29 +64,8 @@ class CadastroView(View):
 
         return render(request,'financeiro/cadastro.html', {'form': form, 'error_message': 'Ocorreu um erro ao salvar o usuário'})
 
-class ListagemView(View):
-    def get(self, request):
-        
-        pesquisa = request.GET.get('palavras-chave')
-
-        receitas = Receita.objects.all()
-        despesas = Despesa.objects.all()
-        if pesquisa:
-            receitas = receitas.filter(nome__icontains=pesquisa.lower())
-            despesas = despesas.filter(nome__icontains=pesquisa.lower())
-            
-        balancetes = Balancete.objects.order_by('-data')
     
-        
-        for balancete in balancetes:
-            print(balancete.nome)  
-        for receita in receitas:
-            print(receita.nome)
-        context = {'receitas': receitas, 'balancetes': balancetes}
-
-        return render(request, 'financeiro/home.html', context)
-    
-class UsuarioView(View):
+class LoginView(View):
     def LoginUsuario(request):
         if request.method == 'POST':
             form = LoginForm(request.POST)
@@ -77,7 +73,6 @@ class UsuarioView(View):
                 email = form.cleaned_data['email']
                 password = form.cleaned_data['password']
 
-                # BUGFIX: Usuário não existente não está sendo tratado.
                 username = User.objects.get(email=email.lower()).username
 
                 user = authenticate(request, username=username, password=password)
@@ -85,9 +80,12 @@ class UsuarioView(View):
                 if user is not None:
                     login(request, user)
 
-                    usuario_login = Usuario.objects.get(user = user) ## assume que o usuário é programador
-                    if usuario_login is not None:
-                        return redirect('financeiro:home', usuario_id=user.id)
+                    usuario = User.objects.get(user = user) 
+                    if usuario is not None:
+                        return redirect('financeiro:home', usuario_id = usuario.id)
+                    else:
+                        
+                        return redirect('financeiro:index')
 
                 else:
                     messages.error(request, 'Email ou senha incorretos.')
@@ -96,9 +94,8 @@ class UsuarioView(View):
 
         contexto = {
             'form': form,
-
         }
-        return render(request, 'financeiro/login.html', contexto)
+        return render(request, 'sisteminha/login.html', contexto)
 
 
 
