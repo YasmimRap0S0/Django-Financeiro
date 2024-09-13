@@ -29,6 +29,9 @@ class HomeView(View):
 
         for receita in receitas:
             print(receita)
+
+        for despesa in despesas:
+            print(despesa)
        
 
         contexto = {'receitas': receitas, 'despesas': despesas, 'balancetes': balancetes}
@@ -80,7 +83,7 @@ class LoginView(View):
                 if user is not None:
                     login(request, user)
 
-                    usuario = User.objects.get(user = user) 
+                    usuario = Usuario.objects.get(user = user) 
                     if usuario is not None:
                         return redirect('financeiro:home', usuario_id = usuario.id)
                     else:
@@ -95,7 +98,7 @@ class LoginView(View):
         contexto = {
             'form': form,
         }
-        return render(request, 'sisteminha/login.html', contexto)
+        return render(request, 'financeiro/login.html', contexto)
 
 
 
