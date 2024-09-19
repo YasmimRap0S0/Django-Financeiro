@@ -1,5 +1,5 @@
 from django.views import View
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.urls import reverse
 from .models import Receita, Usuario, Balancete, Despesa
@@ -84,6 +84,33 @@ class Adddespesa(View):
             return redirect('financeiro:home')
         else:
             return render(request, 'financeiro/add_despesa.html', {'form': form})
+
+class BalanceteDetalhes(View):
+    def get(self, request, id):
+        balancete = get_object_or_404(Balancete, id=id)
+        pesquisa = request.GET.get('palavras-chave')
+        receitas = balancete.receitas.all()
+        despesas = balancete.despesas.all()
+        if balancete.data:
+            data = balancete.data.strftime("%d/%m/%Y")
+        print(data)  # Imprime a data no formato dd/mm/yyyy
+        if pesquisa:
+            receitas = receitas.filter(nome__contains=pesquisa)
+            despesas = despesas.filter(nome__contains=pesquisa)
+
+
+        total_receitas = sum(receita.valor for receita in receitas)
+        total_despesas = sum(despesa.valor for despesa in despesas)
+        saldo = total_receitas - total_despesas
+
+        return render(request, 'financeiro/balancete.html', {
+            'balancete': balancete,
+            'receitas': receitas,
+            'despesas': despesas,
+            'total_receitas': total_receitas,
+            'total_despesas': total_despesas,
+            'saldo': saldo,
+        })
 
 class CadastroView(View):
     def get(self, request):
