@@ -24,13 +24,13 @@ class HomeView(View):
             receitas = receitas.filter(nome__icontains=pesquisa.lower())
             despesas = despesas.filter(nome__icontains=pesquisa.lower())
 
-<<<<<<< HEAD
+
         contexto = {
             'receitas': receitas,
             'despesas': despesas,
             'balancetes': balancetes
         }
-=======
+
         for balancete in balancetes:
             print(balancete)
 
@@ -42,7 +42,7 @@ class HomeView(View):
        
 
         contexto = {'receitas': receitas, 'despesas': despesas, 'balancetes': balancetes}
->>>>>>> 720a433435dca4c02d52313525549cc3bbdf690d
+
 
         return render(request, 'financeiro/home.html', contexto)
 
@@ -111,32 +111,6 @@ class LoginView(View):
             login(request, user)
             return redirect('financeiro:home')
 
-<<<<<<< HEAD
+
         else:
             return render(request, 'financeiro/login.html', {'form': form})
-=======
-                user = authenticate(request, username=username, password=password)
-
-                if user is not None:
-                    login(request, user)
-
-                    usuario = Usuario.objects.get(user = user) 
-                    if usuario is not None:
-                        return redirect('financeiro:home', usuario_id = usuario.id)
-                    else:
-                        
-                        return redirect('financeiro:index')
-
-                else:
-                    messages.error(request, 'Email ou senha incorretos.')
-        else:
-            form = LoginForm()
-
-        contexto = {
-            'form': form,
-        }
-        return render(request, 'financeiro/login.html', contexto)
-
-
-
->>>>>>> 720a433435dca4c02d52313525549cc3bbdf690d
