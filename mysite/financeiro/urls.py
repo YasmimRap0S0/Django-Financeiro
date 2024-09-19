@@ -1,6 +1,6 @@
 from django.urls import path, include
 from django.contrib.auth.views import LoginView, LogoutView
-from .views import IndexView, HomeView, AddReceita, CadastroView, Addbalancete, Adddespesa, BalanceteDetalhes
+from .views import IndexView, HomeView, AddReceita, CadastroView, Addbalancete, Adddespesa, BalanceteDetalhes, logout_view
 
 urlpatterns = [
     path('index/', IndexView.as_view(), name='index'),
@@ -12,5 +12,6 @@ urlpatterns = [
     path('cadastro/', CadastroView.as_view(), name='cadastro'),
     path('login/', LoginView.as_view(), name='login'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('logout/', logout_view, name='logout'),
     path('logout/', LogoutView.as_view(), name='logout'),
 ]

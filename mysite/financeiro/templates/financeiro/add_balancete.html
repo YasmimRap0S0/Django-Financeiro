@@ -4,9 +4,10 @@
     <title>Adicionar Balancete</title>
 </head>
 <body>
+    <div class="observação" style="color: black;">Observação: para determinar a data de criação do balancete digite respectivamente o ano, mês e dia desse modo 0000-00-00</div>
+
     <form method="post">
         {% csrf_token %}
-        <input type="date" name="data">
 
         {{ form.as_p }}
         <button type="submit">Salvar</button>

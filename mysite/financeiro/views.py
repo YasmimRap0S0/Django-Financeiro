@@ -62,7 +62,7 @@ class AddReceita(View):
 class Addbalancete(View):  
     def get(self, request):
         form = AddBalanceteForm()
-        return render(request, 'financeiro/add_receita.html', {'form': form})
+        return render(request, 'financeiro/add_balancete.html', {'form': form})
 
     def post(self, request):
         form = AddBalanceteForm(request.POST)
@@ -70,7 +70,7 @@ class Addbalancete(View):
             form.save()
             return redirect('financeiro:home')
         else:
-            return render(request, 'financeiro/add_receita.html', {'form': form})
+            return render(request, 'financeiro/add_balancete.html', {'form': form})
         
 class Adddespesa(View):  
     def get(self, request):
@@ -154,3 +154,7 @@ class LoginView(View):
 
         else:
             return render(request, 'financeiro/login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('financeiro:index') 
