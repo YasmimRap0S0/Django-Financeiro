@@ -1,5 +1,5 @@
 from django import forms
-from .models import Usuario, Receita, Balancete
+from .models import Usuario, Receita, Balancete, Despesa
 
 
 class UsuarioForm(forms.ModelForm):
@@ -29,6 +29,18 @@ class AddReceitaForm(forms.ModelForm):
     class Meta:
         model = Receita
         fields = ['nome', 'valor', 'balancete']
+        widgets = {
+            'balancete': forms.Select(attrs={'class': 'form-control'})
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['balancete'].queryset = Balancete.objects.all().order_by('nome')
+
+class AddDespesaForm(forms.ModelForm):
+    class Meta:
+        model = Despesa
+        fields = ['nome', 'valor', 'balancete', 'foto_boleto']
         widgets = {
             'balancete': forms.Select(attrs={'class': 'form-control'})
         }

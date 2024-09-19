@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from .models import Receita, Usuario, Balancete, Despesa
 from django.contrib.auth import authenticate, login, logout
-from .forms import UsuarioForm, AddReceitaForm, AddBalanceteForm
+from .forms import UsuarioForm, AddReceitaForm, AddBalanceteForm, AddDespesaForm
 from django.contrib.auth.forms import AuthenticationForm
 
 
@@ -21,8 +21,8 @@ class HomeView(View):
         despesas = Despesa.objects.all()
         
         if pesquisa:
-            receitas = receitas.filter(nome__icontains=pesquisa.lower())
-            despesas = despesas.filter(nome__icontains=pesquisa.lower())
+            receitas = receitas.filter(nome__contains=pesquisa.lower())
+            despesas = despesas.filter(nome__contains=pesquisa.lower())
 
 
         contexto = {
@@ -71,6 +71,19 @@ class Addbalancete(View):
             return redirect('financeiro:home')
         else:
             return render(request, 'financeiro/add_receita.html', {'form': form})
+        
+class Adddespesa(View):  
+    def get(self, request):
+        form = AddDespesaForm()
+        return render(request, 'financeiro/add_despesa.html', {'form': form})
+
+    def post(self, request):
+        form = AddDespesaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('financeiro:home')
+        else:
+            return render(request, 'financeiro/add_despesa.html', {'form': form})
 
 class CadastroView(View):
     def get(self, request):

@@ -1,97 +1,118 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
- <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>home</title>
+    <title>Home</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700;900&display=swap" />
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .box {
+            width: 32%;
+            padding: 20px;
+            border-radius: 5px;
+            background: #f0f0f0;
+        }
+        .Header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            height: 100px;
+            padding: 0 40px;
+            position: relative;
+        }
+        .Logo {
+            display: flex;
+            align-items: center;
+        }
+        .Logo img {
+            margin-right: 10px;
+        }
+        .search-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .search-container input {
+            width: 500px;
+            height: 34px;
+            background: #D9D9D9;
+            border-radius: 40px;
+        }
+    </style>
 </head>
-<body style="background:#FAF8F8">
-   <div class="Home" style="width: 1440px; height: 1096px; position: relative; background: #FAF8F8">
-  <div class="Header" style="width: 1920px; height: 100px; left: 0px; top: 0px; position: absolute">
-    <div class="Rectangle71" style="width: 1920px; height: 100px; left: 0px; top: 0px; position: absolute; background: white"></div>
-    <div class="Logo" style="width: 356px; height: 89px; left: 148px; top: 6px; position: absolute">
-      <div class="Poupemoneyheader" style="width: 230px; height: 27px; left: 126px; top: 32px; position: absolute; color: #1A1A6C; font-size: 36px; font-family: Raleway; font-weight: 700; word-wrap: break-word">PoupeMoney</div>
-      <img class="Image8" style="width: 89px; height: 89px; left: 0px; top: 0px; position: absolute" src="https://img.icons8.com/?size=100&id=59183&format=png&color=000000" />
-      <a href="https://yasmimrr.pythonanywhere.com/financeiro/home/"
-    <div class="Home" style="left: 950px; top: 37px; position: absolute; color: black; font-size: 26px; font-family: Raleway; font-weight: 400; word-wrap: break-word">Home</div></a>
-    <a href='https://yasmimrr.pythonanywhere.com/financeiro/index'>
-    <img class="IconSair" style="width: 63px; height: 63px; left: 1200px; top: 21px; position: absolute" src="https://img.icons8.com/?size=100&id=59781&format=png&color=000000" />
-    </a>
-    <form class="Barra" action="?" method="GET" >
-        <input type="text" name="palavras-chave" placeholder="Pesquisar..." value="{{ request.GET.nome }}" autocomplete="off"style="width: 500px; height: 34px; left: 520px; top: 38px; position: absolute; background: #D9D9D9; border-radius: 40px">
-    </form>
-    </div>
-  </div>
-  
- 
-  <div class="Rectangle75" style="width: 521px; height: 50px; left: 784px; top: 111px; position: absolute; background: #53C872; border-radius: 5px"></div>
-  <div class="Receitas" style="left: 900px; top: 118px; position: absolute; color: white; font-size: 30px; font-family: Raleway; font-weight: 900; word-wrap: break-word">Receitas cadastradas</div>
-  
-  <ul class="list-receita" style="left: 975px; top: 200px; position: absolute; color: black; font-size: 30px; font-family: Raleway; font-weight: 900; word-wrap: break-word; z-index:1;">
-    {% for receita in receitas.all %}
-    <li style="z-index: 1; color: black;">
-      {{ receita.nome }}
-  
-    </li>
-    {% endfor %}
-  </ul>
-  <div class="Rectangle76" style="width: 521px; height: 50px; left: 784px; top: 607px; position: absolute; background: #E52424; border-radius: 5px"></div>
-  <div class="Rectangle80" style="width: 521px; height: 50px; left: 784px; top: 845px; position: absolute; background: #E52424; border-radius: 5px"></div>
-  <div class="Boletos" style="left: 976px; top: 853px; position: absolute; text-align: center; color: white; font-size: 30px; font-family: Raleway; font-weight: 900; word-wrap: break-word">Boletos</div>
-  <ul class="lista-boleto" style="width: 360px; height: 33.70px; left: 976px; top: 900px; position: absolute; color: black; font-size: 30px; font-family: Raleway; font-weight: 900; word-wrap: break-word; padding-top: 30px; z-index: 1;" ></ul>
-    {% for despesa in despesas %}
-    <li style="color:black; z-index: 1;">
-        {{ despesa.foto.url }}
-    </li>
-    {% endfor %}
-</ul>
-  </div>
-  <div class="DespesasCadastradas" style="width: 360px; height: 45px; left: 906px; top: 616px; position: absolute; color: white; font-size: 30px; font-family: Raleway; font-weight: 900; word-wrap: break-word">Despesas cadastradas</div>
-<<<<<<< HEAD
-  <ul class="lista-d" style="width: 360px; height: 33.70px; left: 906px; top: 650px; position: absolute; color: black; font-size: 30px; font-family: Raleway; font-weight: 900; word-wrap: break-word; padding-top: 30px;" >
-    {% for despesa in despesas %}
-    <li style="color:black; z-index: 1;">
-        {{ despesa.nome }}
-    </li>
-    {% endfor %}
-</ul>
-=======
-  <ul class="ListDespesas" style="">
+<body style="background: #FAF8F8">
+    <div class="Home" style="max-width: 1440px; margin: auto; position: relative;">
+        <div class="Header">
+            <div class="Logo">
+                <img class="Image8" style="width: 89px; height: 89px;" src="https://img.icons8.com/?size=100&id=59183&format=png&color=000000" />
+                <div class="Poupemoneyheader" style="color: #1A1A6C; font-size: 36px; font-family: Raleway; font-weight: 700;">PoupeMoney</div>
+            </div>
+            <nav>
+                <a href="{% url 'financeiro:home' %}" style="color: black; font-size: 26px; font-family: Raleway; font-weight: 400;">Home</a>
+                <a href="{% url 'financeiro:index' %}">
+                    <img class="IconSair" style="width: 63px; height: 63px; margin-left: 20px;" src="https://img.icons8.com/?size=100&id=59781&format=png&color=000000" />
+                </a>
+            </nav>
+            <div class="search-container">
+                <form class="Barra" action="?" method="GET">
+                    <input type="text" name="palavras-chave" placeholder="Pesquisar receita ou despesa" value="{{ request.GET.nome }}" autocomplete="off">
+                </form>
+            </div>
+        </div>
 
-  </ul>
->>>>>>> 720a433435dca4c02d52313525549cc3bbdf690d
-  <div class="ListBalancete" style="width: 572px; height: 100px; left: 134px; top: 607px; position: absolute; z-index:1">
-    <div class="BalancetesRegistrados" style="width: 571px; height: 50px; left: 1px; top: 0px; position: absolute">
+        <div class="Add" style="margin-top: 20px; text-align: center;">
+            <button class="AddReceita" style="width: 349px; height: 60px; background: #53C872; color: black; font-size: 30px; font-family: Raleway; font-weight: 900;">
+                <a href="{% url 'financeiro:add_receita' %}" style="color: black; text-decoration: none;">Adicionar receita</a>
+            </button>
+            <button class="AddDespesa" style="width: 362px; height: 50px; background: #E52424; color: black; font-size: 30px; font-family: Raleway; font-weight: 900; margin-left: 10px;">
+                <a href="{% url 'financeiro:add_despesa' %}" style="color: black; text-decoration: none;">Adicionar despesa</a>
+            </button>
+            <button class="AddBalancete" style="width: 320px; height: 51px; background: #2176FF; color: black; font-size: 30px; font-family: Raleway; font-weight: 900; margin-left: 10px;">
+                <a href="{% url 'financeiro:add_balancete' %}" style="color: black; text-decoration: none;">Criar balancete</a>
+            </button>
+        </div>
 
-      <div class="Rectangle77" style="width: 571px; height: 50px; left: 0px; top: 0px; position: absolute; background: #2176FF; border-radius: 5px"></div>
-      <div class="Rectangle77" style="width: 571px; height: 50px; left: 0px; top: 0px; position: absolute; background: #2176FF; border-radius: 5px"></div>
-    <div class="BalancetesRegistrados" style="width: 360px; height: 33.70px; left: 128px; top: 7.61px; position: absolute; color: white; font-size: 30px; font-family: Raleway; font-weight: 900; word-wrap: break-word">Balancetes registrados</div>
-    <ul class="lista-b" style="width: 360px; height: 33.70px; left: 128px; top: 20px; position: absolute; color: black; font-size: 30px; font-family: Raleway; font-weight: 900; word-wrap: break-word; padding-top: 30px;" >
-        {% for balancete in balancetes %}
-        <li style="color:black; z-index: 1;">
-            {{ balancete.nome }}
-        </li>
-        {% endfor %}
-    </ul>
-</div>
-  </div>
-  <div class="Add" style="width: 500px; height: 253px; left: 228px; top: 171px; position: absolute">
-    <button class="AddReceita" style="width: 349px; height: 60px; left: 0px; top: 0px; position: absolute"><a href="{% url 'financeiro:add_receita' %}"
-      <div class="AdicionarReceita" style="width: 300px;left: 50px; top: 12px; position: absolute; color: black; font-size: 30px; font-family: Raleway; font-weight: 900; word-wrap: break-word">Adicionar receita</div>
-      <img class="Positive" style="width: 60px; height: 60px; left: 0px; top: 0px; position: absolute" src="https://img.icons8.com/?size=100&id=63650&format=png&color=000000" />
-    </button></a>
-    <div class="AddDespesa" style="width: 362px; height: 50px; left: 5px; top: 98px; position: absolute">
-      <div class="AdicionarDespesa" style="left: 90px; top: 15px; position: absolute; color: black; font-size: 30px; font-family: Raleway; font-weight: 900; word-wrap: break-word">Adicionar despesa</div>
-      <img class="Negative" style="width: 50px; height: 50px; left: 0px; top: 0px; position: absolute" src="https://img.icons8.com/?size=100&id=12386&format=png&color=000000" />
-    </div>
-    <div class="AddBalancete" style="width: 320px; height: 51px; left: 5px; top: 202px; position: absolute">
-      <div class="CriarBalancete" style="left: 90px; top: 16px; position: absolute; color: black; font-size: 30px; font-family: Raleway; font-weight: 900; word-wrap: break-word">Criar balancete</div>
-      <img class="Image9" style="width: 50px; height: 50px; left: 0px; top: 0px; position: absolute" src="https://img.icons8.com/?size=100&id=IQd8RkUZTuAQ&format=png&color=000000" />
-    </div>
-  </div>
-</div>
+        <div class="container">
+            <div class="box">
+                <div class="Rectangle77" style="background: #2176FF; border-radius: 5px; padding: 10px; text-align: center; color: white; font-size: 30px; font-family: Raleway; font-weight: 900;">
+                    Balancetes
+                </div>
+                <ul class="lista-b" style="list-style-type: none; padding: 0; color: black; font-size: 30px; font-family: Raleway; font-weight: 900;">
+                    {% for balancete in balancetes %}
+                    <li>{{ balancete.nome }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
 
-  </body>
+            <div class="box">
+                <div class="Rectangle75" style="background: #53C872; border-radius: 5px; padding: 10px; text-align: center; color: white; font-size: 30px; font-family: Raleway; font-weight: 900;">
+                    Receitas
+                </div>
+                <ul class="list-receita" style="list-style-type: none; padding: 0; color: black; font-size: 30px; font-family: Raleway; font-weight: 900;">
+                    {% for receita in receitas %}
+                    <li>{{ receita.nome }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="box">
+                <div class="Rectangle76" style="background: #E52424; border-radius: 5px; padding: 10px; text-align: center; color: white; font-size: 30px; font-family: Raleway; font-weight: 900;">
+                    Despesas
+                </div>
+                <ul class="lista-d" style="list-style-type: none; padding: 0; color: black; font-size: 30px; font-family: Raleway; font-weight: 900;">
+                    {% for despesa in despesas %}
+                    <li>{{ despesa.nome }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
 </html>

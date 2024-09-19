@@ -4,37 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PoupeMoney</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700;900&display=swap" />
+    <style>
+        body {
+            background: #FAF8F8;
+            font-family: 'Raleway', sans-serif;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            height: 100px;
+            padding: 0 40px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            width: 89px;
+            height: 89px;
+            margin-right: 10px;
+        }
+        .actions a {
+            color: #2176FF;
+            font-size: 26px;
+            margin-left: 20px;
+            text-decoration: none;
+        }
+        .banner {
+            background: linear-gradient(180deg, #2176FF 0%, #1A1A6C 100%);
+            height: 500px;
+            position: relative;
+        }
+        .banner-text {
+            position: absolute;
+            left: 148px;
+            top: 275px;
+            color: white;
+            font-size: 45px;
+            font-weight: 600;
+        }
+        .content {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            padding: 0 40px;
+        }
+        .section {
+            width: 30%;
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .section img {
+            width: 120px;
+        }
+    </style>
 </head>
-<body style="background:#FAF8F8">
-    <div class="index" style="width: 1440px; height: 1024px; position: relative; background: #FAF8F8">
-  <div class="Header" style="width: 1920px; height: 100px; left: 0px; top: 0px; position: absolute">
-    <div class="Rectangle71" style="width: 1920px; height: 100px; left: 0px; top: 0px; position: absolute; background: white"></div>
-    <div class="Logo" style="width: 356px; height: 89px; left: 148px; top: 6px; position: absolute">
-      <div class="Poupemoneyheader" style="width: 230px; height: 27px; left: 126px; top: 32px; position: absolute; color: #1A1A6C; font-size: 36px; font-family: Raleway; font-weight: 700; word-wrap: break-word">PoupeMoney</div>
-      <img class="foto-logo" style="width: 89px; height: 89px; left: 0px; top: 0px; position: absolute" src="https://img.icons8.com/?size=100&id=59183&format=png&color=000000" />
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="https://img.icons8.com/?size=100&id=59183&format=png&color=000000" alt="Logo" />
+            <div style="color: #1A1A6C; font-size: 36px; font-weight: 700;">PoupeMoney</div>
+        </div>
+        <div class="actions">
+            <a href="{% url 'financeiro:login' %}">Login</a>
+            <a href="{% url 'financeiro:cadastro' %}">Cadastre-se</a>
+        </div>
     </div>
-    <div class="Actions" style="width: 282px; height: 27px; left: 1031px; top: 40px; position: absolute">
-      <a href="#">
-    <div class="Login" style="width: 84px; height: 27px; left: 0px; top: 0px; position: absolute; color: #2176FF; font-size: 26px; font-family: Raleway; font-weight: 400; word-wrap: break-word">
-        Login
+
+    <div class="banner">
+        <div class="banner-text">Cuidar do seu dinheiro pode ser simples<br/>com o nosso gerenciador!</div>
+        <img class="Money" style="width: 440px; height: 406px; position: absolute; right: 0; bottom: 0;" src="https://img.icons8.com/?size=100&id=64554&format=png&color=000000" />
     </div>
-</a>
-    <a href="#"
-      <div class="CadastreSe" style="width: 153px; height: 24px; left: 129px; top: 1px; position: absolute; color: #2176FF; font-size: 26px; font-family: Raleway; font-weight: 400; word-wrap: break-word">Cadastre-se</div>
-    </a>
-  </div>
-  <div class="Rectangle66" style="width: 1920px; height: 500px; left: 0px; top: 100px; position: absolute; background: linear-gradient(180deg, #2176FF 0%, #1A1A6C 100%)"></div>
-  <div class="TextoIndex" style="width: 516px; height: 212px; left: 148px; top: 275px; position: absolute; color: white; font-size: 45px; font-family: Raleway; font-weight: 600; word-wrap: break-word">Cuidar do seu dinheiro pode ser simples<br/>com o nosso gerenciador!</div>
-  <img class="Money" style="width: 440px; height: 406px; left: 899px; top: 147px; position: absolute" src="https://img.icons8.com/?size=100&id=64554&format=png&color=000000" />
-  <div class="Receita" style="width: 480px; height: 336px; left: 217px; top: 653px; position: absolute">
-    <img class="Positive" style="width: 183px; height: 183px; left: 83px; top: 105px; position: absolute" src="https://img.icons8.com/?size=100&id=63650&format=png&color=000000" />
-    <div class="AdicioneSuasReceitasEDespesas" style="left: 0px; top: 301px; position: absolute; color: black; font-size: 30px; font-family: Raleway; font-weight: 500; word-wrap: break-word">Adicione suas receitas e despesas</div>
-    <img class="Negative" style="width: 120px; height: 120px; left: 267px; top: 0px; position: absolute" src="https://img.icons8.com/?size=100&id=12386&format=png&color=000000" />
-  </div>
-  <div class="Balancetes" style="width: 371px; height: 273px; left: 858px; top: 716px; position: absolute">
-    <img class="GrFico" style="width: 225px; height: 225px; left: 92px; top: 0px; position: absolute" src="https://img.icons8.com/?size=100&id=IQd8RkUZTuAQ&format=png&color=000000" />
-    <div class="CrieEVisualizeBalancetes" style="left: 30px; top: 238px; position: absolute; color: black; font-size: 30px; font-family: Raleway; font-weight: 500; word-wrap: break-word">Crie e visualize balancetes</div>
-  </div>
-</div>
+
+    <div class="content">
+        <div class="section">
+            <img class="Positive" src="https://img.icons8.com/?size=100&id=63650&format=png&color=000000" />
+            <div style="color: black; font-size: 30px; font-weight: 500;">Adicione suas receitas e despesas</div>
+        </div>
+        <div class="section">
+            <img class="GrFico" src="https://img.icons8.com/?size=100&id=IQd8RkUZTuAQ&format=png&color=000000" />
+            <div style="color: black; font-size: 30px; font-weight: 500;">Crie e visualize balancetes</div>
+        </div>
+    </div>
 </body>
 </html>
