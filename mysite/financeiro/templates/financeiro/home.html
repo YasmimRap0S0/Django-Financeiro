@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700;900&display=swap" />
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .box {
+            width: 32%;
+            padding: 20px;
+            border-radius: 5px;
+            background: #f0f0f0;
+        }
+        .Header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            height: 100px;
+            padding: 0 40px;
+            position: relative;
+        }
+        .Logo {
+            display: flex;
+            align-items: center;
+        }
+        .Logo img {
+            margin-right: 10px;
+        }
+        .search-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .search-container input {
+            width: 500px;
+            height: 34px;
+            background: #D9D9D9;
+            border-radius: 40px;
+        }
+    </style>
+</head>
+<body style="background: #FAF8F8">
+    <div class="Home" style="max-width: 1440px; margin: auto; position: relative;">
+        <div class="Header">
+            <div class="Logo">
+                <img class="Image8" style="width: 89px; height: 89px;" src="https://img.icons8.com/?size=100&id=59183&format=png&color=000000" />
+                <div class="Poupemoneyheader" style="color: #1A1A6C; font-size: 36px; font-family: Raleway; font-weight: 700;">PoupeMoney</div>
+            </div>
+            <nav>
+                <a href="{% url 'financeiro:home' %}" style="color: black; font-size: 26px; font-family: Raleway; font-weight: 400;">Home</a>
+                <a href="{% url 'financeiro:logout' %}">
+                    <img class="IconSair" style="width: 63px; height: 63px; margin-left: 20px;" src="https://img.icons8.com/?size=100&id=59781&format=png&color=000000" />
+                </a>
+            </nav>
+            <div class="search-container">
+                <form class="Barra" action="?" method="GET">
+                    <input type="text" name="palavras-chave" placeholder="Pesquisar receita ou despesa" value="{{ request.GET.nome }}" autocomplete="off">
+                </form>
+            </div>
+        </div>
+
+        <div class="Add" style="margin-top: 20px; text-align: center;">
+            <button class="AddReceita" style="width: 349px; height: 60px; background: #53C872; color: black; font-size: 30px; font-family: Raleway; font-weight: 900;">
+                <a href="{% url 'financeiro:add_receita' %}" style="color: black; text-decoration: none;">Adicionar receita</a>
+            </button>
+            <button class="AddDespesa" style="width: 362px; height: 50px; background: #E52424; color: black; font-size: 30px; font-family: Raleway; font-weight: 900; margin-left: 10px;">
+                <a href="{% url 'financeiro:add_despesa' %}" style="color: black; text-decoration: none;">Adicionar despesa</a>
+            </button>
+            <button class="AddBalancete" style="width: 320px; height: 51px; background: #2176FF; color: black; font-size: 30px; font-family: Raleway; font-weight: 900; margin-left: 10px;">
+                <a href="{% url 'financeiro:add_balancete' %}" style="color: black; text-decoration: none;">Criar balancete</a>
+            </button>
+        </div>
+
+        <div class="container">
+            <div class="box">
+                <div class="Rectangle77" style="background: #2176FF; border-radius: 5px; padding: 10px; text-align: center; color: white; font-size: 30px; font-family: Raleway; font-weight: 900;">
+                    Links de balancetes
+                </div>
+                <ul class="lista-b" style="list-style-type: none; padding: 0; color: black; font-size: 30px; font-family: Raleway; font-weight: 900;">
+                    {% for balancete in balancetes %}
+                    <li>
+                      <a href="{% url 'financeiro:balancete' balancete.id %}" style="color: black; text-decoration: none;">
+                      {{ balancete.nome }}
+                    </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="box">
+                <div class="Rectangle75" style="background: #53C872; border-radius: 5px; padding: 10px; text-align: center; color: white; font-size: 30px; font-family: Raleway; font-weight: 900;">
+                    Receitas
+                </div>
+                <ul class="list-receita" style="list-style-type: none; padding: 0; color: black; font-size: 30px; font-family: Raleway; font-weight: 900;">
+                    {% for receita in receitas %}
+                    <li>{{ receita.nome }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="box">
+                <div class="Rectangle76" style="background: #E52424; border-radius: 5px; padding: 10px; text-align: center; color: white; font-size: 30px; font-family: Raleway; font-weight: 900;">
+                    Despesas
+                </div>
+                <ul class="lista-d" style="list-style-type: none; padding: 0; color: black; font-size: 30px; font-family: Raleway; font-weight: 900;">
+                    {% for despesa in despesas %}
+                    <li>{{ despesa.nome }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
