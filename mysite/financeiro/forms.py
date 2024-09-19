@@ -12,10 +12,6 @@ class UsuarioForm(forms.ModelForm):
             'senha': forms.PasswordInput(attrs={"placeholder": "Senha", "class":"RecSenha", "style": "width: 400px; height: 52.20px; left: 148px; top: 679px; position: absolute; background: white; border-radius: 50px; border: 1px #7B7B7B solid"})
         }
 
-class LoginForm(forms.Form):
-    email = forms.EmailField(label="Email", max_length=150)
-    password = forms.CharField(label="Senha", widget=forms.PasswordInput)
-
 class AddBalanceteForm(forms.ModelForm):
     class Meta:
         model = Balancete

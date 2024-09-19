@@ -1,9 +1,8 @@
 from django.views import View
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
-from django.urls import reverse
 from .models import Receita, Usuario, Balancete, Despesa
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout
 from .forms import UsuarioForm, AddReceitaForm, AddBalanceteForm, AddDespesaForm
 from django.contrib.auth.forms import AuthenticationForm
 
