@@ -1,5 +1,6 @@
 from django import forms
-from .models import Usuario
+from .models import Usuario, Receita, Balancete
+
 
 class UsuarioForm(forms.ModelForm):
     class Meta:
@@ -14,4 +15,25 @@ class UsuarioForm(forms.ModelForm):
 class LoginForm(forms.Form):
     email = forms.EmailField(label="Email", max_length=150)
     password = forms.CharField(label="Senha", widget=forms.PasswordInput)
+
+class AddBalanceteForm(forms.ModelForm):
+    class Meta:
+        model = Balancete
+        fields = ['nome', 'data']
+        widgtes = {
+            'nome': forms.TextInput(attrs={'placeholder': 'Nomeie o balancete'}), 
+            'data' : forms.DateField()    
+            }
+
+class AddReceitaForm(forms.ModelForm):
+    class Meta:
+        model = Receita
+        fields = ['nome', 'valor', 'balancete']
+        widgets = {
+            'balancete': forms.Select(attrs={'class': 'form-control'})
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['balancete'].queryset = Balancete.objects.all().order_by('nome')
 

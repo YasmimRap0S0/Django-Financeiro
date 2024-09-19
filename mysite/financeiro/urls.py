@@ -1,12 +1,14 @@
 from django.urls import path, include
-from .views import IndexView, CadastroView, HomeView, LoginView
-
-app_name = 'financeiro'
+from django.contrib.auth.views import LoginView, LogoutView
+from .views import IndexView, HomeView, AddReceita, CadastroView, Addbalancete  
 
 urlpatterns = [
-    path('index', IndexView.as_view(), name='index'),
-    path('home/<int:usuario_id>', HomeView.as_view(), name='home'),
+    path('index/', IndexView.as_view(), name='index'),
+    path('home/', HomeView.as_view(), name='home'),
+    path('add_receita/', AddReceita.as_view(), name='add_receita'),
+    path('add_balancete/', Addbalancete.as_view(), name='add_balancete'),
     path('cadastro/', CadastroView.as_view(), name='cadastro'),
     path('login/', LoginView.as_view(), name='login'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]

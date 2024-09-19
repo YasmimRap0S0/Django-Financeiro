@@ -1,39 +1,62 @@
 from django.views import View
-from django.shortcuts import render, redirect, get_object_or_404
-#from django.core.exceptions import PermissionDenied
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.urls import reverse
 from .models import Receita, Usuario, Balancete, Despesa
-from django.contrib import messages
-from django.contrib.auth import authenticate, login
-from .forms import UsuarioForm ,  LoginForm
+from django.contrib.auth import authenticate, login, logout
+from .forms import UsuarioForm, AddReceitaForm, AddBalanceteForm
+from django.contrib.auth.forms import AuthenticationForm
+
 
 class IndexView(View):
     def get(self, request):
         return render(request, 'financeiro/index.html')
 
 class HomeView(View):
-    def get(self, request, usuario_id):
-        usuario = Usuario.objects.get(id=usuario_id)
+    def get(self, request):
         pesquisa = request.GET.get('palavras-chave')
 
-        balancetes = Balancete.objects.filter(usuario=usuario).order_by('-data')
-        receitas = Receita.objects.filter(usuario=usuario)
-        despesas = Despesa.objects.filter(usuario=usuario)
+        balancetes = Balancete.objects.all().order_by('-data')
+        receitas = Receita.objects.all()
+        despesas = Despesa.objects.all()
+        
         if pesquisa:
             receitas = receitas.filter(nome__icontains=pesquisa.lower())
             despesas = despesas.filter(nome__icontains=pesquisa.lower())
 
-        for balancete in balancetes:
-            print(balancete)
-
-        for receita in receitas:
-            print(receita)
-       
-
-        contexto = {'receitas': receitas, 'despesas': despesas, 'balancetes': balancetes}
+        contexto = {
+            'receitas': receitas,
+            'despesas': despesas,
+            'balancetes': balancetes
+        }
 
         return render(request, 'financeiro/home.html', contexto)
+
+class AddReceita(View):  
+    def get(self, request):
+        form = AddReceitaForm()
+        return render(request, 'financeiro/add_receita.html', {'form': form})
+
+    def post(self, request):
+        form = AddReceitaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('financeiro:home')
+        else:
+            return render(request, 'financeiro/add_receita.html', {'form': form})
+        
+class Addbalancete(View):  
+    def get(self, request):
+        form = AddBalanceteForm()
+        return render(request, 'financeiro/add_receita.html', {'form': form})
+
+    def post(self, request):
+        form = AddBalanceteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('financeiro:home')
+        else:
+            return render(request, 'financeiro/add_receita.html', {'form': form})
 
 class CadastroView(View):
     def get(self, request):
@@ -50,52 +73,29 @@ class CadastroView(View):
             )
 
             new_usuario = Usuario(
-                 user=novo_usuario,
-                 nome=form.cleaned_data['nome'], ##inserir na tabela usuario
-                 email=form.cleaned_data['email'],
-                 senha=form.cleaned_data['senha'],
-                 )
+                user=novo_usuario,
+                nome=form.cleaned_data['nome'],
+                email=form.cleaned_data['email'],
+                senha=form.cleaned_data['senha'],
+            )
 
             new_usuario.save()
 
-            usuario_id = new_usuario.id
+            return redirect('financeiro:home')
 
-            return redirect('financeiro:home', usuario_id=usuario_id)
+        return render(request, 'financeiro/cadastro.html', {'form': form, 'error_message': 'Ocorreu um erro ao salvar o usuário'})
 
-        return render(request,'financeiro/cadastro.html', {'form': form, 'error_message': 'Ocorreu um erro ao salvar o usuário'})
-
-    
 class LoginView(View):
-    def LoginUsuario(request):
-        if request.method == 'POST':
-            form = LoginForm(request.POST)
-            if form.is_valid():
-                email = form.cleaned_data['email']
-                password = form.cleaned_data['password']
+    def get(self, request):
+        form = AuthenticationForm()
+        return render(request, 'financeiro/login.html', {'form': form})
 
-                username = User.objects.get(email=email.lower()).username
+    def post(self, request):
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('financeiro:home')
 
-                user = authenticate(request, username=username, password=password)
-
-                if user is not None:
-                    login(request, user)
-
-                    usuario = User.objects.get(user = user) 
-                    if usuario is not None:
-                        return redirect('financeiro:home', usuario_id = usuario.id)
-                    else:
-                        
-                        return redirect('financeiro:index')
-
-                else:
-                    messages.error(request, 'Email ou senha incorretos.')
         else:
-            form = LoginForm()
-
-        contexto = {
-            'form': form,
-        }
-        return render(request, 'sisteminha/login.html', contexto)
-
-
-
+            return render(request, 'financeiro/login.html', {'form': form})

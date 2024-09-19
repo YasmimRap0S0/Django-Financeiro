@@ -5,9 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro do Programador</title>
+    <title>Login</title>
 </head>
-   <body ">
+   <body>
        <div class="Cadastro" style="width: 1920px; height: 1024px; position: relative; background: #FAF8F8">
           <div class="Header" style="width: 1920px; height: 100px; left: 0px; top: 0px; position: absolute">
             <div class="Rectangle71" style="width: 1920px; height: 100px; left: 0px; top: 0px; position: absolute; background: white"></div>
@@ -26,17 +26,16 @@
           <div class="Rectangle72" style="width: 600px; height: 600px; left: 135px; top: 258px; position: absolute; background: white"></div>
           <div class="InsiraSeuEMail" style="width: 176.51px; height: 30px; left: 148px; top: 457px; position: absolute"><span style="color: black; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">Insira seu e-mail </span><span style="color: #E52424; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">*</span></div>
           <div class="InsiraUmaSenha" style="width: 176.51px; height: 38px; left: 148px; top: 622px; position: absolute"><span style="color: black; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">Insira uma senha </span><span style="color: #E63131; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">*</span></div>
-          <form class="cadastrando "method="POST" >
-                {% csrf_token %}
-                {% for field in form %}
-                    {{ field.errors }}
-                    {{ field }}
-                {% endfor %}
-                <button class="BOTAOC" style="background-color:#2176FF; width: 400px; height: 52.20px; left: 148px; top: 800px; position: absolute;color: #FAF8F8; border-radius: 50px; border: 1px #7B7B7B solid" type="submit">Cadastre-se</button>
+          <form action="" method="POST">
+            {% csrf_token %}
+            
+              <input type="username" id="email" name="username" class="rectEmailInput" style="width: 400px; height: 52.20px; left: 148px; top: 513px; position: absolute; background: white; border-radius: 50px; border: 1px #7B7B7B solid" placeholder="Digite seu email" required />
+              <input type="password" id="password" style="width: 400px; height: 52.20px; left: 148px; top: 679px; position: absolute; background: white; border-radius: 50px; border: 1px #7B7B7B solid" name="password" class="rectPasswordInput" placeholder="Digite sua senha" required />
+                  <button class="BOTAOC" style="background-color:#2176FF; width: 400px; height: 52.20px; left: 148px; top: 800px; position: absolute;color: #FAF8F8; border-radius: 50px; border: 1px #7B7B7B solid" type="submit">Cadastre-se</button>
             </form>
 
           <img class="ImageGeneric" style="width: 250px; height: 300px; left: 900px; top: 350px; position: absolute" src="https://static-00.iconduck.com/assets.00/money-mouth-face-emoji-512x512-qnbojb0r.png" />
           <div class="SejaBemVindo" style="width: 337px; height: 47px; left: 868px; top: 191px; position: absolute; color: white; font-size: 40px; font-family: Inter; font-weight: 600; word-wrap: break-word">Seja bem-vindo!</div>
         </div>
    </body>
->>>>>>> New
+

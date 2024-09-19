@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adicionar Balancete</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <input type="date" name="data">
+
+        {{ form.as_p }}
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>

@@ -13,8 +13,9 @@ class Usuario(models.Model):
 
 class Balancete(models.Model):
     nome = models.CharField(max_length=30)
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    data = models.DateTimeField('Data de registro')
+    data = models.DateField('Data de registro')
+    def __str__(self):
+        return self.nome
 
 
     def publicada_recentemente(self):
@@ -25,11 +26,11 @@ class Receita(models.Model):
     nome = models.CharField(max_length=30)
     valor = models.FloatField(default=0)
     balancete = models.ForeignKey(Balancete, on_delete=models.CASCADE)
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    
 
 class Despesa(models.Model):
     nome = models.CharField(max_length=30)
     valor = models.FloatField(default=0)
     foto_boleto = models.ImageField(upload_to='boletos/', null=True, blank=True)
     balancete = models.ForeignKey(Balancete, on_delete=models.CASCADE)
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    
