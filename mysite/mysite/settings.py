@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-h-y3bddxs!hvy+_7hxrdx*!xv9#2%m$@t)j4(_!8l11+wil8^b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['YasmimRR.pythonanywhere.com', 'locahost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -57,7 +57,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'templates',  # Adicione este diretório se necessário
+            BASE_DIR / 'templates', 
         ],
         'APP_DIRS': True,
         'OPTIONS': {
