@@ -1,7 +1,12 @@
 from django.views import View
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
-from .models import Receita, Usuario, Balancete, Despesa
+
+from financeiro.models.usuario import Usuario
+from financeiro.models.balancete import Balancete
+from financeiro.models.receita import Receita
+from financeiro.models.despesa import Despesa
+
 from django.contrib.auth import login, logout
 from .forms import UsuarioForm, AddReceitaForm, AddBalanceteForm, AddDespesaForm
 from django.contrib.auth.forms import AuthenticationForm

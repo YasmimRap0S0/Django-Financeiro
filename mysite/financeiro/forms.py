@@ -1,6 +1,8 @@
 from django import forms
-from .models import Usuario, Receita, Balancete, Despesa
-
+from financeiro.models.usuario import Usuario
+from financeiro.models.balancete import Balancete
+from financeiro.models.receita import Receita
+from financeiro.models.despesa import Despesa
 
 class UsuarioForm(forms.ModelForm):
     class Meta:
