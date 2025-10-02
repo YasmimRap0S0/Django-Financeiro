@@ -12,5 +12,5 @@ class Balancete(models.Model):
 
 
     def publicada_recentemente(self):
-        agora = timezone.now()
-        return self.data >= agora - datetime.timedelta(hours=24)
+        agora = timezone.now().date()
+        return self.data >= agora - datetime.timedelta(days=1)
