@@ -2,10 +2,11 @@ from django.test import TestCase
 from .models.balancete import Balancete
 from .models.receita import Receita
 from .models.despesa import Despesa
+import datetime
 
 class BalanceteTestCase(TestCase):
 	def setUp(self):
-		self.balancete = Balancete.objects.create(nome="Teste", data="2025-10-02")
+		self.balancete = Balancete.objects.create(nome="Teste", data=datetime.date.today())
 
 	def test_balancete_str(self):
 		self.assertEqual(str(self.balancete), "Teste")
