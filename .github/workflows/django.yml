@@ -25,4 +25,5 @@ jobs:
         pip install -r mysite/requirements.txt
     - name: Run Tests
       run: |
-        python manage.py test
+        cd mysite/financeiro
+        python manage.py test financeiro
