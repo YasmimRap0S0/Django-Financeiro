@@ -22,7 +22,9 @@
     "vscode": {
       "extensions": [
         "ms-python.python", //suporte completo ao Python
-        "ms-python.vscode-pylance" //autocompletar inteligente e análise de código
+        "ms-python.vscode-pylance", //autocompletar inteligente e análise de código
+        "github.vscode-github-actions",
+				"redhat.vscode-yaml"
       ]
     }
   }
