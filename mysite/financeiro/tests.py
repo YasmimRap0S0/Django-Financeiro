@@ -1,5 +1,7 @@
 from django.test import TestCase
-from .models import Balancete, Receita, Despesa
+from .models.balancete import Balancete
+from .models.receita import Receita
+from .models.despesa import Despesa
 
 class BalanceteTestCase(TestCase):
 	def setUp(self):
