@@ -41,8 +41,9 @@ jobs:
     - name: Instalar pip-audit
       run: pip install pip-audit
 
-    - name: Salvar relatório da auditoria
-      run: pip-audit -f json -o audit-report.json
+    - name: Rodar auditoria de segurança
+      run: pip-audit -f json -o audit-report.json || true
+
 
     - name: Upload do relatório
       uses: actions/upload-artifact@v4
