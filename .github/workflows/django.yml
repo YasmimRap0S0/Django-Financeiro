@@ -38,12 +38,20 @@ jobs:
         python manage.py test financeiro
 
 
+    - name: Install Vulnerable Test Dependencies
+      run: |
+        pip install -r requirements-test.txt
+
+
+
     - name: "Run OWASP Biblioteca"
       uses: dependency-check/Dependency-Check_Action@main
       with:
         project: "Django Financeiro REPORT"
         path: "./mysite"
         format: "HTML"
+
+
 
    
 
