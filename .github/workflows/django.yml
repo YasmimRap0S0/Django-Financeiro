@@ -47,7 +47,7 @@ jobs:
     - name: OWASP Report
       uses: actions/upload-artifact@v4
       with:
-        name: owasp-report
+        name: owasp-report-${{ matrix.python-version }}
         path: reports/dependency-check-report.html
 
 
