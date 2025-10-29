@@ -37,14 +37,6 @@ jobs:
         cd mysite
         python manage.py test financeiro
 
-
-    - name: Testa bibliotecas vulneraveis
-      run: |
-
-        pip install -r mysite/requirements-test.txt
-
-
-
     - name: "Run OWASP Biblioteca"
       uses: dependency-check/Dependency-Check_Action@main
       with:
