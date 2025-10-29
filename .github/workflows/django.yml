@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
@@ -14,13 +15,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4.1.0
-
     - name: Configurar Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4.7.0
       with:
         python-version: ${{ matrix.python-version }}
-
-    - name: Instalar dependências vulneráveis
+    - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r mysite/requirements.txt
@@ -32,18 +31,11 @@ jobs:
           --disable=all \
           --enable=deprecated-module,deprecated-method \
           --fail-under=10
-
-    - name: Rodar testes
+          
+    - name: Run Tests
       run: |
         cd mysite
         python manage.py test financeiro
 
-    - name: Instalar pip-audit
-      run: pip install pip-audit
-
-    - name: Rodar audit e relatorio
-      run: |
-        pip-audit > audit-report.txt || true
-        cat audit-report.txt
-
+   
 
