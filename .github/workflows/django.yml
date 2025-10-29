@@ -38,9 +38,10 @@ jobs:
         python manage.py test financeiro
 
 
-    - name: Install Vulnerable Test Dependencies
+    - name: Testa bibliotecas vulneraveis
       run: |
-        pip install -r requirements-test.txt
+
+        pip install -r mysite/requirements-test.txt
 
 
 
