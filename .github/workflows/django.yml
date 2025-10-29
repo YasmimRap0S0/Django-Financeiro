@@ -24,7 +24,18 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r mysite/requirements.txt
         pip install pylint
+
+    - name: Verificar código deprecado
+      run: |
+        pylint mysite/financeiro/ \
+          --disable=all \
+          --enable=deprecated-module,deprecated-method \
+          --fail-under=10
+          
     - name: Run Tests
       run: |
         cd mysite
         python manage.py test financeiro
+
+   
+
