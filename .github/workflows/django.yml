@@ -37,5 +37,13 @@ jobs:
         cd mysite
         python manage.py test financeiro
 
+
+    - name: "Run OWASP Biblioteca"
+      uses: dependency-check/Dependency-Check_Action@main
+      with:
+        project: "Django Financeiro REPORT"
+        path: "./mysite"
+        format: "HTML"
+
    
 

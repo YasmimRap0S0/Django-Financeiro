@@ -28,11 +28,6 @@ updates:
     schedule:
       interval: "daily"
 
-  - name: "Run OWASP Biblioteca"
-    uses: dependency-check/Dependency-Check_Action@main
-    with:
-    project: "Django Financeiro"
-    path: "./mysite"
-    format: "HTML"
+
 
   
