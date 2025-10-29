@@ -45,14 +45,15 @@ jobs:
 
     - name: Rodar OWASP Dependency-Check
       uses: dependency-check/Dependency-Check_Action@main
-      env:
-        OSSINDEX_USERNAME: ${{ secrets.OSSINDEX_USERNAME }}
-        OSSINDEX_PASSWORD: ${{ secrets.OSSINDEX_PASSWORD }}
       with:
         project: "Django Financeiro REPORT"
         path: "./scan-target"
         format: "HTML"
         out: "reports/${{ matrix.python-version }}"
+        args: >
+          --ossindexUsername "${{ secrets.OSSINDEX_USERNAME }}"
+          --ossindexPassword "${{ secrets.OSSINDEX_PASSWORD }}"
+
 
 
     - name: Salvar relatório OWASP
