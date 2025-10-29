@@ -44,6 +44,12 @@ jobs:
         path: "./mysite"
         format: "HTML"
 
+    - name: OWASP Report
+      uses: actions/upload-artifact@v3
+      with:
+      name: owasp-report
+      path: ./dependency-check-report.html
+
 
 
    
